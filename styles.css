@@ -1,4 +1,4 @@
-/* ========== PALETA DE COLORES (CAMBIA AQUÍ PARA PROBAR) ========== */
+/* ========== PALETA DE COLORES ========== */
 :root {
   --primary: #C9A87C;
   --primary-dark: #B58E63;
@@ -167,7 +167,6 @@ header {
 .hero-image:hover img {
   transform: scale(1.02);
   transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  filter: brightness(1.02) saturate(1.02);
 }
 .hero-badge {
   background: var(--primary-light);
@@ -222,8 +221,7 @@ header {
   max-width: 340px;
   border-radius: 40px;
   animation: fadeInScale 1.2s ease-out;
-  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), filter 0.3s ease;
-  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 @keyframes fadeInScale {
   0% {
@@ -239,7 +237,6 @@ header {
 }
 .about-img:hover img {
   transform: scale(1.03);
-  filter: brightness(1.02) saturate(1.02);
 }
 .about-signature {
   display: inline-flex;
@@ -263,13 +260,30 @@ header {
   padding: 1.8rem;
   text-align: center;
   border: 1px solid var(--border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow, border-color;
 }
 .service-card:hover, .benefit-item:hover, .step:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 30px -12px var(--shadow);
 }
-.service-icon, .benefit-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+.service-icon, .benefit-icon { 
+  font-size: 2.5rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem;
+  display: inline-block;
+  background: rgba(201,168,124,0.1);
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.service-card:hover .service-icon, .benefit-item:hover .benefit-icon {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.05);
+}
 .step-number {
   background: var(--primary-light);
   width: 48px;
@@ -290,8 +304,13 @@ header {
   padding: 0.2rem 1rem;
   border-radius: 50px;
 }
+.service-tag i {
+  margin-right: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--primary);
+}
 
-/* ========== SECTION HEADER (títulos con línea) ========== */
+/* ========== SECTION HEADER ========== */
 .section-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -301,6 +320,10 @@ header {
   display: inline-block;
   position: relative;
   margin-bottom: 1.2rem;
+}
+.section-header h2 i {
+  color: var(--primary);
+  margin: 0 0.2rem;
 }
 .section-header h2:after {
   content: '';
@@ -366,6 +389,10 @@ header {
   background: linear-gradient(135deg, #f7f2ea 0%, #ede4d8 100%);
   padding: 4rem 0;
   text-align: center;
+}
+.artistic-header h2 i {
+  font-size: 1.6rem;
+  margin: 0 0.25rem;
 }
 .artistic-slider {
   position: relative;
@@ -450,27 +477,96 @@ header {
 }
 .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-/* ========== CONTACTO SIMPLE ========== */
-.contact-simple {
-  text-align: center;
-  padding: 2rem;
-  background: var(--white);
-  border-radius: 48px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.whatsapp-big {
-  display: inline-flex;
+/* ========== CONTACTO ========== */
+.contact-grid {
+  display: flex;
+  gap: 2.5rem;
   align-items: center;
-  gap: 0.8rem;
-  font-size: 1.1rem;
-  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+.contact-image {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+.contact-image img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 2rem;
+  box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+  transition: all 0.4s cubic-bezier(0.2,0.9,0.4,1.1);
+}
+.contact-image img:hover {
+  transform: scale(1.02);
+}
+.contact-form-card {
+  flex: 1.2;
+  background: var(--white);
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(93, 122, 92, 0.08);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+.contact-form-card h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1.2rem;
+}
+.contact-form-card h3 i {
+  color: var(--primary);
+  margin-right: 0.5rem;
+}
+.form-group {
+  margin-bottom: 1.2rem;
+}
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-light);
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+.form-group input:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(201,168,124,0.2);
+}
+.btn-whatsapp-submit {
+  background: #25D366;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn-whatsapp-submit:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+}
+.social-links-mini {
+  margin-top: 1rem;
+  text-align: center;
+}
+.social-links-mini p {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.8rem;
 }
 .social-links {
-  margin: 1.5rem 0;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  margin-top: 0.5rem;
 }
 .social-icon {
   color: var(--secondary);
@@ -480,10 +576,6 @@ header {
 .social-icon:hover {
   color: var(--primary);
   transform: translateY(-3px);
-}
-.contact-note-mobile {
-  font-size: 0.8rem;
-  color: #7A6E62;
 }
 
 /* ========== FOOTER ========== */
@@ -505,22 +597,158 @@ footer {
 .delay-2 { transition-delay: 0.2s; }
 .delay-3 { transition-delay: 0.3s; }
 
-/* ========== RESPONSIVE (móvil) con menú hamburguesa mejorado ========== */
+/* ========== SCROLL TOP BUTTON ========== */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: var(--text-dark);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 99;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========== TALLER ========== */
+.workshops-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #FFF9F2 0%, #FDF5EC 100%);
+  position: relative;
+}
+.workshop-single-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 2.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(93, 122, 92, 0.12);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+.workshop-single-card:hover {
+  transform: translateY(-5px);
+}
+.workshop-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-light);
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 1.2rem;
+}
+.workshop-title {
+  font-size: 1.9rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.workshop-intro {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+  border-left: 3px solid var(--primary);
+  padding-left: 1.2rem;
+}
+.workshop-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+.theme-badge {
+  background: rgba(201, 168, 124, 0.12);
+  padding: 0.4rem 1rem;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--secondary);
+  transition: all 0.2s;
+}
+.theme-badge i {
+  font-size: 0.5rem;
+  margin-right: 0.4rem;
+  color: var(--primary);
+  vertical-align: middle;
+}
+.theme-badge:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+.workshop-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+}
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.detail-item i {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+.workshop-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+.btn-workshop {
+  background: #25D366;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  box-shadow: 0 8px 18px rgba(37, 211, 102, 0.2);
+}
+.btn-workshop:hover {
+  background: #128C7E;
+  transform: translateY(-3px);
+}
+.cta-note {
+  font-size: 0.8rem;
+  color: #7A6E62;
+  margin-top: 1rem;
+}
+.cta-note i {
+  margin-right: 0.3rem;
+  color: #e67e22;
+}
+
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .container { padding: 0 1.2rem; }
   .menu-icon { 
     display: block; 
-    order: 2; 
     z-index: 1001;
-    transition: transform 0.2s ease;
-  }
-  .menu-icon:hover {
-    transform: scale(1.05);
-  }
-  .navbar { 
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-    position: relative; 
   }
   .nav-overlay {
     position: fixed;
@@ -569,42 +797,135 @@ footer {
     width: 100%;
     text-align: center;
   }
-  .nav-links a {
-    display: block;
-    padding: 0.5rem;
-    font-size: 1rem;
+  
+  /* ===== MEJORA DE SEPARACIÓN ENTRE SECCIONES EN MÓVIL ===== */
+  /* Eliminamos márgenes y paddings por defecto y establecemos bordes consistentes */
+  section {
+    padding: 3rem 0;
   }
+  /* Hero mantiene su fondo degradado y padding menor */
+  .hero {
+    padding: 2rem 0 3rem 0;
+  }
+  /* Para todas las secciones excepto hero, añadimos un borde superior sutil */
+  section:not(#home) {
+    border-top: 1px solid var(--border);
+  }
+  /* Las secciones con fondo bg-soft ya tienen contraste, pero mantenemos borde igual */
+  .bg-soft {
+    background-color: var(--bg-soft);
+  }
+  /* Ajuste específico para la sección de workshops que tiene fondo degradado */
+  .workshops-section {
+    border-top: 1px solid var(--border);
+  }
+  /* Última sección (contacto) no necesita borde inferior extra, pero mantenemos el superior */
+  
+  /* Aumentamos margen inferior del encabezado de sección para mayor claridad */
+  .section-header {
+    margin-bottom: 2rem;
+  }
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+  .section-header h2:after {
+    width: 50px;
+    height: 2px;
+    bottom: -0.5rem;
+  }
+  
   .hero-grid { flex-direction: column; }
   .hero-image { order: 1; margin-bottom: 1.5rem; }
   .hero-content { order: 2; text-align: center; }
   .hero-image img { max-width: 260px; }
   .hero-buttons { justify-content: center; }
-  .hero-buttons .btn-primary, .hero-buttons .btn-outline { width: 100%; }
   .hero-stats { justify-content: center; gap: 1rem; }
   .hero-content h1 { font-size: 2rem; text-align: center; }
   .services-grid, .benefits-grid, .method-steps {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
-  .service-card, .benefit-item, .step {
-    padding: 1rem;
-  }
-  .service-icon, .benefit-icon { font-size: 2rem; }
-  .service-card h3, .benefit-item h4 { font-size: 1.1rem; }
-  .service-card p, .benefit-item p { font-size: 0.75rem; }
   .about-wrapper { flex-direction: column-reverse; text-align: center; }
+  
+  /* Efecto móvil: transiciones suaves para color/borde/sombra */
+  .service-card, .benefit-item, .step, .workshop-single-card {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+    will-change: border-color, box-shadow, background-color;
+  }
+  .service-card.card-highlight, 
+  .benefit-item.card-highlight, 
+  .step.card-highlight, 
+  .workshop-single-card.card-highlight {
+    border-color: var(--primary);
+    box-shadow: 0 12px 24px rgba(201, 168, 124, 0.2);
+    background-color: #FFFCF8;
+    transform: scale(1.01);
+  }
+
+  .artistic-header h2 i {
+    font-size: 0.9rem;
+    margin: 0 0.15rem;
+  }
+  .artistic-text {
+    font-size: 1.2rem;
+  }
+  
+  .contact-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact-image {
+    order: 1;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  .contact-image img {
+    max-width: 180px;
+    border-radius: 1.5rem;
+  }
+  .contact-form-card {
+    order: 2;
+    width: 100%;
+    padding: 1.5rem;
+  }
+  .contact-form-card h3 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  
   .slider-btn { width: 32px; height: 32px; }
-  .artistic-text { font-size: 1.2rem; }
-  .section-header h2:after {
-    width: 40px;
-    height: 2px;
-    bottom: -0.4rem;
+  .workshop-single-card {
+    padding: 1.5rem;
+  }
+  .workshop-title {
+    font-size: 1.5rem;
+  }
+  .workshop-intro {
+    font-size: 0.95rem;
+  }
+  .theme-badge {
+    font-size: 0.75rem;
+  }
+  .detail-item {
+    font-size: 0.8rem;
+  }
+  .workshop-details {
+    gap: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .services-grid, .benefits-grid, .method-steps {
-    grid-template-columns: 1fr;
-  }
   .hero-content h1 { font-size: 1.8rem; }
+  .contact-image {
+    max-width: 150px;
+  }
+  .contact-image img {
+    max-width: 140px;
+  }
+  .artistic-header h2 i {
+    font-size: 0.8rem;
+  }
+  section {
+    padding: 2.5rem 0;
+  }
 }
